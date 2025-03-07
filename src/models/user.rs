@@ -1,5 +1,5 @@
 pub struct User {
-    pub id: i32,
+    pub id: i64,
     pub first_name: String,
     pub last_name: Option<String>,
     pub username: Option<String>,
