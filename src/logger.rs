@@ -1,6 +1,6 @@
 use tracing::Level;
 
-pub fn init(level: Level) -> anyhow::Result<()> {
+pub fn init(level: Level) {
     let subscriber = tracing_subscriber::fmt()
         .pretty()
         .with_file(true)
@@ -10,22 +10,23 @@ pub fn init(level: Level) -> anyhow::Result<()> {
         .with_max_level(level)
         .finish();
 
-    tracing::subscriber::set_global_default(subscriber)?;
+    if let Err(e) = tracing::subscriber::set_global_default(subscriber) {
+        tracing::error!("Ошибка инициализации глобального журнала: {e:?}");
+    }
 
     tracing::info!("Это информационное сообщение");
     tracing::debug!("Это отладочное сообщение");
     tracing::warn!("Это предупреждающее сообщение");
     tracing::error!("Это сообщение об ошибке");
-    Ok(())
 }
 
 #[cfg(test)]
 mod tests {
     use tracing::Level;
+    use super::*;
 
     #[test]
     fn test_init() {
-        let result = super::init(Level::WARN);
-        assert!(result.is_ok());
+        init(Level::WARN);
     }
 }
