@@ -3,4 +3,35 @@ name = "planify-rs"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "planify_rs"
+
 [dependencies]
+# errors
+anyhow = "1.0.97"
+
+# logs
+tracing = "0.1.41"
+tracing-subscriber = "0.3.19"
+log = "0.4.26"
+
+# serde
+serde = {version = "1.0.218", features = ["derive"]}
+
+# config
+config = "0.15.9"
+
+# async
+tokio = {version = "1.43.0", features = ["full"]}
+
+# sqlx
+[dependencies.sqlx]
+version = "0.8.3"
+features = ["macros", "sqlite", "runtime-tokio", "chrono", "uuid"]
+
+[dev-dependencies]
+fake = "4.0.0"

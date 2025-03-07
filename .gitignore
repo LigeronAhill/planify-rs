@@ -2,4 +2,5 @@
 /.idea/
 config.toml
 .cargo
-storage
+storage/storage.db
+.env
