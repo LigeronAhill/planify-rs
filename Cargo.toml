@@ -28,6 +28,9 @@ config = "0.15.9"
 # async
 tokio = {version = "1.43.0", features = ["full"]}
 
+# telegram
+teloxide = { version = "0.13.0", features = ["macros"] }
+
 # sqlx
 [dependencies.sqlx]
 version = "0.8.3"

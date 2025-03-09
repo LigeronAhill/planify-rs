@@ -7,7 +7,7 @@ impl Storage {
     #[instrument(skip(self))]
     pub async fn insert_user(&self, user: &User) -> Result<()> {
         sqlx::query_file!(
-            "storage/queries/users/insert.sql",
+            "./storage/queries/users/insert.sql",
             user.id,
             user.first_name,
             user.last_name,
@@ -20,7 +20,7 @@ impl Storage {
     }
     #[instrument(skip(self))]
     pub async fn get_user(&self, id: i64) -> Result<Option<User>> {
-        let result = sqlx::query_file_as!(User, "storage/queries/users/get.sql", id)
+        let result = sqlx::query_file_as!(User, "./storage/queries/users/get.sql", id)
             .fetch_optional(&self.pool)
             .await?;
         Ok(result)
