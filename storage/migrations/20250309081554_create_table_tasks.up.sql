@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS tasks (
+    id INTEGER NOT NULL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    title TEXT NOT NULL,
+    status TEXT NOT NULL
+)

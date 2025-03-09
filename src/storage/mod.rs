@@ -1,4 +1,5 @@
 mod users;
+mod tasks;
 use sqlx::{ConnectOptions, Pool, Sqlite, SqlitePool};
 use anyhow::Result;
 use sqlx::sqlite::SqliteConnectOptions;
