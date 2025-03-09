@@ -9,7 +9,7 @@ impl Storage {
         let status = task.status.to_string();
         let created = sqlx::query_file_as!(
             Task,
-            "./storage/queries/tasks/create.sql",
+            "storage/queries/tasks/create.sql",
             task.user_id,
             task.title,
             status,
@@ -20,7 +20,7 @@ impl Storage {
     }
     #[instrument(skip(self))]
     pub async fn get_all_tasks(&self, user_id: i64) -> Result<Vec<Task>> {
-        let result = sqlx::query_file_as!(Task, "./storage/queries/tasks/get_all.sql", user_id)
+        let result = sqlx::query_file_as!(Task, "storage/queries/tasks/get_all.sql", user_id)
             .fetch_all(&self.pool)
             .await?;
         Ok(result)
@@ -30,7 +30,7 @@ impl Storage {
         let status = status.to_string();
         let result = sqlx::query_file_as!(
             Task,
-            "./storage/queries/tasks/update_status.sql",
+            "storage/queries/tasks/update_status.sql",
             status,
             task_id,
             user_id,
@@ -42,7 +42,7 @@ impl Storage {
     #[instrument(skip(self))]
     pub async fn get_completed_tasks(&self, user_id: i64) -> Result<Vec<Task>> {
         let result =
-            sqlx::query_file_as!(Task, "./storage/queries/tasks/get_completed.sql", user_id)
+            sqlx::query_file_as!(Task, "storage/queries/tasks/get_completed.sql", user_id)
                 .fetch_all(&self.pool)
                 .await?;
         Ok(result)
